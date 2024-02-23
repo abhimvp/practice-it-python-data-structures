@@ -1,5 +1,22 @@
-from collections import namedtuple
+from collections import namedtuple, defaultdict
+from pprint import pprint
 
+def get_dict(list_to_categorize):
+    res = defaultdict(lambda:set())
+    for item in list_to_categorize:
+        cat = item.identifier[0:3]
+        match cat:
+            case "STA":
+                res["starter"].add(item)
+            case "BEV":
+                res["beverage"].add(item)
+            case "ENT":
+                res["entree"].add(item)
+            case "DES":
+                res["dessert"].add(item)
+        
+    return res
+    
 def main():
     #add code here
     Food = namedtuple("Food", ["identifier", "name"])
@@ -36,7 +53,8 @@ def main():
         Food("BEV003",	"Cafe Latte"),
     ]
 
-    return
+    pprint(dict(get_dict(nadias_list)))
+    # return
 
 if __name__ == "__main__":
     main()
